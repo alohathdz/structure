@@ -16,8 +16,7 @@ class PositionController extends Controller
     public function index()
     {
         $position = Position::all();
-        $employee = Employee::all();
-        return view('home', compact('position', 'employee'));
+        return view('position_show', compact('position'));
     }
 
     /**

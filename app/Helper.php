@@ -9,6 +9,14 @@ function datethai($strDate)
     return $strDay . ' ' . $strMonthThai . ' ' . $strYear;
 }
 
+function dateeng($strDate)
+{
+    $strYear = date("Y", strtotime($strDate)) - 543;
+    $strMonth = date("n", strtotime($strDate));
+    $strDay = date("j", strtotime($strDate));
+    return $strYear . '-' . $strMonth . '-' . $strDay;
+}
+
 function age($birthday)
 {
     $age = date("Y") - date("Y", strtotime($birthday));

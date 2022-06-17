@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -25,7 +27,11 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $position = Position::whereNotIn('id', function ($query) {
+            $query->select('position_id')->from('employees');
+        })->where('status', true)->get();
+        
+        return view('employee_add', compact('position'));
     }
 
     /**
@@ -36,7 +42,17 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $emp = new Employee();
+        $emp->rank = $request->rank;
+        $emp->firstname = $request->firstname;
+        $emp->lastname = $request->lastname;
+        $emp->id_number = $request->id_number;
+        $emp->soldier_number = $request->soldier_number;
+        $emp->corps = $request->corps;
+        $emp->origin = $request->origin;
+        $emp->birthday = dateeng($request->birthday);
+        $emp->rank_date = dateeng($request->rankdate);
+        $emp->education = $request->education;
     }
 
     /**

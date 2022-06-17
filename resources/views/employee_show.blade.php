@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 @section('content')
 <div class="container-fluid">
-    <a href="{{ route('employee_add') }}" class="btn btn-primary btn-sm">เพิ่มกำลังพล</a>
+    <a href="{{ route('employee_create') }}" class="btn btn-primary btn-sm">เพิ่มกำลังพล</a>
     <hr class="my-2">
     <table class="table table-striped table-bordered table-hover align-middle text-center" id="myTable">
         <thead>

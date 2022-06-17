@@ -101,14 +101,9 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label" for="origin"><b>ตำแหน่ง</b></label>
-                            <select class="form-select" name="origin" required>
-                                <option value="" selected disabled hidden>เลือกตำแหน่ง</option>
-                                @foreach ($position as $row)
-                                <option value="">{{ $row->number }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-3">
+                            <label for="position" class="form-label"><b>เลขตำแหน่ง</b></label>
+                            <input type="text" class="form-control" name="position">
                         </div>
 
                         <div class="col-md-12 text-center">

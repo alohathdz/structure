@@ -14,12 +14,15 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $i = 0;
+            @endphp
             @foreach ($position as $row)
             <tr @if ($row->status == 0)
                 class="table-dark"
                 @endif>
-                <th scope="row">{{ $row->id }}</th>
-                <td class="text-start">{{ $row->shortname }}<br>( {{ $row->name }} )<br>{{ $row->number }}</td>
+                <th scope="row">{{ ++$i }}</th>
+                <td class="text-start">{{ $row->shortname }}<br>( {{ $row->name }} )<br>{{ $row->id }}</td>
                 <td>{{ $row->expert }}</td>
                 <td>{{ $row->rate }}</td>
                 <td>{{ $row->corps }}</td>

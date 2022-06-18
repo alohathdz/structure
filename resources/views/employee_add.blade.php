@@ -7,7 +7,7 @@
                 <h5 class="card-header text-center">เพิ่มข้อมูลกำลังพล</h5>
                 <div class="card-body">
                     <!-- Form -->
-                    <form class="row g-3" action="#" method="POST" enctype="multipart/form-data">
+                    <form class="row g-3" action="{{ route('employee_store') }}" method="POST">
                         @csrf
 
                         <div class="col-md-3">
@@ -32,22 +32,27 @@
 
                         <div class="col-md-4">
                             <label for="firstname" class="form-label"><b>ชื่อ</b></label>
-                            <input type="text" class="form-control" name="firstname" required>
+                            <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname">
+                            @error('firstname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div>
 
                         <div class="col-md-5">
                             <label for="lastname" class="form-label"><b>สกุล</b></label>
-                            <input type="text" class="form-control" name="lastname" required>
+                            <input type="text" class="form-control" name="lastname">
                         </div>
 
                         <div class="col-md-3">
                             <label for="id_number" class="form-label"><b>เลขประจำตัวประชาชน</b></label>
-                            <input type="text" class="form-control" name="id_number" required>
+                            <input type="text" class="form-control" name="id_number">
                         </div>
 
                         <div class="col-md-3">
                             <label for="soldier_number" class="form-label"><b>เลขประจำตัวทหาร</b></label>
-                            <input type="text" class="form-control" name="soldier_number" required>
+                            <input type="text" class="form-control" name="soldier_number">
                         </div>
 
                         <div class="col-md-3">
@@ -102,8 +107,8 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="position" class="form-label"><b>เลขตำแหน่ง</b></label>
-                            <input type="text" class="form-control" name="position">
+                            <label for="position_id" class="form-label"><b>เลขตำแหน่ง</b></label>
+                            <input type="text" class="form-control" name="position_id">
                         </div>
 
                         <div class="col-md-12 text-center">

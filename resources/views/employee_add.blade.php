@@ -32,43 +32,67 @@
 
                         <div class="col-md-4">
                             <label for="firstname" class="form-label"><b>ชื่อ</b></label>
-                            <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname">
+                            <input type="text" class="form-control @error('firstname') is-invalid @enderror"
+                                name="firstname">
                             @error('firstname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                            @enderror
                         </div>
 
                         <div class="col-md-5">
                             <label for="lastname" class="form-label"><b>สกุล</b></label>
-                            <input type="text" class="form-control" name="lastname">
+                            <input type="text" class="form-control @error('lastname') is-invalid @enderror"
+                                name="lastname">
+                            @error('lastname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-3">
                             <label for="id_number" class="form-label"><b>เลขประจำตัวประชาชน</b></label>
-                            <input type="text" class="form-control" name="id_number">
+                            <input type="text" class="form-control @error('id_number') is-invalid @enderror"
+                                name="id_number">
+                            @error('id_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-3">
                             <label for="soldier_number" class="form-label"><b>เลขประจำตัวทหาร</b></label>
-                            <input type="text" class="form-control" name="soldier_number">
+                            <input type="text" class="form-control @error('soldier_number') is-invalid @enderror"
+                                name="soldier_number">
+                            @error('soldier_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-3">
                             <label class="form-label" for="corps"><b>เหล่า</b></label>
-                            <select class="form-select" name="corps" required>
+                            <select class="form-select @error('corps') is-invalid @enderror" name="corps" required>
                                 <option value="" selected disabled hidden>เลือกเหล่า</option>
                                 <option value="ม.">ม.</option>
                                 <option value="พ.">พ.</option>
                                 <option value="กง.">กง.</option>
                                 <option value="">ไม่จำกัดเหล่า</option>
                             </select>
+                            @error('corps')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-3">
                             <label class="form-label" for="origin"><b>กำเนิด</b></label>
-                            <select class="form-select" name="origin" required>
+                            <select class="form-select @error('origin') is-invalid @enderror" name="origin" required>
                                 <option value="" selected disabled hidden>เลือกกำเนิด</option>
                                 <option value="นร.">นร.</option>
                                 <option value="นพท.">นพท.</option>
@@ -77,22 +101,28 @@
                                 <option value="นชท.">นชท.</option>
                                 <option value="กองหนุน">กองหนุน</option>
                             </select>
+                            @error('origin')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-3">
                             <label for="document_date" class="form-label"><b>วันเกิด</b></label>
                             <input type="text" class="form-control" name="birthday" id="birthday"
-                                placeholder="ปี-เดือน-วัน" readonly>
+                                placeholder="เลือกวันเกิด" readonly>
                         </div>
 
                         <div class="col-md-3">
                             <label for="document_date" class="form-label"><b>วันที่ได้รับยศล่าสุด</b></label>
-                            <input type="text" class="form-control" name="birthday" id="rankdate"
-                                placeholder="ปี-เดือน-วัน" readonly>
+                            <input type="text" class="form-control" name="rankdate" id="rankdate"
+                                placeholder="เลือกวันที่ได้รับยศล่าสุด" readonly>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="education"><b>วุฒิการศึกษา</b></label>
-                            <select class="form-select" name="education" required>
+                            <select class="form-select @error('education') is-invalid @enderror" name="education"
+                                required>
                                 <option value="" selected disabled hidden>เลือกวุฒิการศึกษา</option>
                                 <option value="ม.ต้น">มัธยมศึกษาตอนต้น</option>
                                 <option value="ม.ปลาย">มัธยมศึกษาตอนปลาย</option>
@@ -104,11 +134,22 @@
                                 <option value="ป.เอก">ปริญญาเอก</option>
                                 <option value="">อื่น ๆ</option>
                             </select>
+                            @error('education')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-3">
                             <label for="position_id" class="form-label"><b>เลขตำแหน่ง</b></label>
-                            <input type="text" class="form-control" name="position_id">
+                            <input type="text" class="form-control @error('position_id') is-invalid @enderror"
+                                name="position_id">
+                            @error('position_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-12 text-center">
@@ -123,25 +164,22 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="{{ asset('bootstrap-datepicker-thai-thai/css/datepicker.css') }}" rel="stylesheet">
-<script type="text/javascript" src="{{ asset('bootstrap-datepicker-thai-thai/js/bootstrap-datepicker.js') }}"></script>
-<!-- thai extension -->
-<script type="text/javascript" src="{{ asset('bootstrap-datepicker-thai-thai/js/bootstrap-datepicker-thai.js') }}">
-</script>
-<script type="text/javascript"
-    src="{{ asset('bootstrap-datepicker-thai-thai/js/locales/bootstrap-datepicker.th.js') }}"></script>
-    <script>
-        $(function() {
+<link href="{{ asset('bootstrap-datepicker-thai/css/datepicker.css') }}" rel="stylesheet">
+<script src="{{ asset('bootstrap-datepicker-thai/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js') }}"></script>
+<script src="{{ asset('bootstrap-datepicker-thai/js/locales/bootstrap-datepicker.th.js') }}"></script>
+<script>
+    $(function() {
                 $("#birthday").datepicker({
                     language: 'th-th',
-                    format: 'yyyy-mm-dd',
+                    format: 'dd/mm/yyyy',
                     autoclose: true
                 }),
                 $("#rankdate").datepicker({
                     language: 'th-th',
-                    format: 'yyyy-mm-dd',
+                    format: 'dd/mm/yyyy',
                     autoclose: true
                 });
             });
-    </script>
+</script>
 @endsection

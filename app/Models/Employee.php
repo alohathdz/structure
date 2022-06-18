@@ -20,6 +20,7 @@ class Employee extends Model
         'birthday',
         'rank_date',
         'education',
+        'position_id',
     ];
 
     public function position() {

@@ -17,6 +17,12 @@ function dateeng($strDate)
     return $strYear . '-' . $strMonth . '-' . $strDay;
 }
 
+function formatdatethai($strDate)
+{
+    $date = str_replace('/', '-', $strDate);
+    return date('Y-m-d', strtotime($date));
+}
+
 function age($birthday)
 {
     $age = date("Y") - date("Y", strtotime($birthday));

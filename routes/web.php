@@ -26,8 +26,9 @@ Route::get('/employee/index', [App\Http\Controllers\EmployeeController::class, '
 Route::get('/employee/create', [App\Http\Controllers\EmployeeController::class, 'create'])->name('employee_create');
 Route::post('/employee/store', [App\Http\Controllers\EmployeeController::class, 'store'])->name('employee_store');
 Route::get('/employee/edit/{id}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employee_edit');
+Route::put('/employee/update/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employee_update');
 
 Route::get('/test', function(){
-    $var = "18/6/2565";
-    return dateeng(formatdatethai($var));
+    $var = "2016-10-01";
+    return formatdateeng($var);
 });

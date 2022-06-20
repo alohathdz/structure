@@ -7,8 +7,9 @@
                 <h5 class="card-header text-center">เพิ่มข้อมูลกำลังพล</h5>
                 <div class="card-body">
                     <!-- Form -->
-                    <form class="row g-3" action="#" method="POST">
+                    <form class="row g-3" action="{{ route('employee_update', ['id' => $emp->id]) }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <div class="col-md-3">
                             <label class="form-label" for="rank"><b>ยศ</b></label>
@@ -108,13 +109,13 @@
                         <div class="col-md-3">
                             <label for="document_date" class="form-label"><b>วันเกิด</b></label>
                             <input type="text" class="form-control" name="birthday" id="birthday"
-                                value="{{ $emp->birthday }}" readonly>
+                                value="{{ formatdateeng($emp->birthday) }}" readonly>
                         </div>
 
                         <div class="col-md-3">
                             <label for="document_date" class="form-label"><b>วันที่ได้รับยศล่าสุด</b></label>
                             <input type="text" class="form-control" name="rankdate" id="rankdate"
-                                value="{{ $emp->rank_date }}" readonly>
+                                value="{{ formatdateeng($emp->rank_date) }}" readonly>
                         </div>
                         
                         <div class="col-md-6">

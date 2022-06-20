@@ -6,7 +6,6 @@ use App\Models\Employee;
 use App\Models\Position;
 use ErrorException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -117,9 +116,22 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Employee::where('id', $request->id)
+        ->update([
+            'rank' => $request->rank,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'id_number' => $request->id_number,
+            'soldier_number' => $request->soldier_number,
+            'corps' => $request->corps,
+            'origin' => $request->origin,
+            'birthday' => dateeng(formatdatethai($request->birthday)),
+            'rank_date' => dateeng(formatdatethai($request->rankdate)),
+            'education' => $request->education,
+            'position_id' => $request->position_id
+        ]);
     }
 
     /**

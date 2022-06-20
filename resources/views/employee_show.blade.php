@@ -39,7 +39,7 @@
                 <td>{{ $row->origin }}</td>
                 <td>{{ age($row->birthday) }}</td>
                 <td>{{ $row->education }}</td>
-                <td><a href="#" class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">ลบ</a></td>
+                <td><a href="{{ route('employee_edit', ['id' => $row->id]) }}" class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">ลบ</a></td>
                 @endforeach
         </tbody>
     </table>

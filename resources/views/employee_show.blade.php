@@ -20,6 +20,7 @@
                 <th scope="col" class="text-center">กำเนิด</th>
                 <th scope="col" class="text-center">วันเกิด</th>
                 <th scope="col" class="text-center">วุฒิการศึกษา</th>
+                <th scope="col" class="text-center">จัดการ</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
                 <td>{{ $row->origin }}</td>
                 <td>{{ age($row->birthday) }}</td>
                 <td>{{ $row->education }}</td>
+                <td><a href="#" class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">ลบ</a></td>
                 @endforeach
         </tbody>
     </table>

@@ -33,7 +33,7 @@
                         <div class="col-md-4">
                             <label for="firstname" class="form-label"><b>ชื่อ</b></label>
                             <input type="text" class="form-control @error('firstname') is-invalid @enderror"
-                                name="firstname">
+                                name="firstname" value="{{ old('firstname') }}">
                             @error('firstname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                         <div class="col-md-5">
                             <label for="lastname" class="form-label"><b>สกุล</b></label>
                             <input type="text" class="form-control @error('lastname') is-invalid @enderror"
-                                name="lastname">
+                                name="lastname" value="{{ old('lastname') }}">
                             @error('lastname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                         <div class="col-md-3">
                             <label for="id_number" class="form-label"><b>เลขประจำตัวประชาชน</b></label>
                             <input type="text" class="form-control @error('id_number') is-invalid @enderror"
-                                name="id_number">
+                                name="id_number" value="{{ old('id_number') }}">
                             @error('id_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -66,7 +66,7 @@
                         <div class="col-md-3">
                             <label for="soldier_number" class="form-label"><b>เลขประจำตัวทหาร</b></label>
                             <input type="text" class="form-control @error('soldier_number') is-invalid @enderror"
-                                name="soldier_number">
+                                name="soldier_number" value="{{ old('soldier_number') }}">
                             @error('soldier_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -119,6 +119,7 @@
                             <input type="text" class="form-control" name="rankdate" id="rankdate"
                                 placeholder="เลือกวันที่ได้รับยศล่าสุด" readonly>
                         </div>
+                        
                         <div class="col-md-6">
                             <label class="form-label" for="education"><b>วุฒิการศึกษา</b></label>
                             <select class="form-select @error('education') is-invalid @enderror" name="education"
@@ -144,7 +145,7 @@
                         <div class="col-md-3">
                             <label for="position_id" class="form-label"><b>เลขตำแหน่ง</b></label>
                             <input type="text" class="form-control @error('position_id') is-invalid @enderror"
-                                name="position_id">
+                                name="position_id" value="{{ old('position_id') }}">
                             @error('position_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

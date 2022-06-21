@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <h5 class="card-header text-center">เพิ่มข้อมูลกำลังพล</h5>
+                <h5 class="card-header text-center">แก้ไขข้อมูลกำลังพล</h5>
                 <div class="card-body">
                     <!-- Form -->
                     <form class="row g-3" action="{{ route('employee_update', ['id' => $emp->id]) }}" method="POST">
@@ -180,4 +180,22 @@
                 });
             });
 </script>
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('success'))
+<script>
+    Swal.fire("Success !!",
+    "{{ Session::get('success') }}",
+    "success"
+    );
+</script>
+@elseif (session('error'))
+<script>
+    Swal.fire({
+    title:"Error !!",
+    text:"{{ Session::get('error') }}",
+    icon:"error"
+    });
+</script>
+@endif
 @endsection

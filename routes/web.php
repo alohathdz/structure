@@ -27,6 +27,7 @@ Route::get('/employee/create', [App\Http\Controllers\EmployeeController::class, 
 Route::post('/employee/store', [App\Http\Controllers\EmployeeController::class, 'store'])->name('employee_store');
 Route::get('/employee/edit/{id}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employee_edit');
 Route::put('/employee/update/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employee_update');
+Route::get('/employee/delete/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('employee_destroy');
 
 Route::get('/test', function(){
     $var = "2016-10-01";

@@ -65,7 +65,7 @@ class EmployeeController extends Controller
                 'education' => 'required',
                 'position_id' => 'digits:12|unique:employees'
             ]);
-    
+
             Employee::create([
                 'rank' => $request->rank,
                 'firstname' => $request->firstname,
@@ -105,8 +105,12 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $emp = Employee::find($id);
-        return view('employee_edit', compact('emp'));
+        if (Employee::find($id)) {
+            $emp = Employee::find($id);
+            return view('employee_edit', compact('emp'));
+        } else {
+            return redirect()->route('employee_index')->with('error', 'ไม่พบข้อมูล');
+        }
     }
 
     /**
@@ -118,20 +122,33 @@ class EmployeeController extends Controller
      */
     public function update(Request $request)
     {
-        Employee::where('id', $request->id)
-        ->update([
-            'rank' => $request->rank,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'id_number' => $request->id_number,
-            'soldier_number' => $request->soldier_number,
-            'corps' => $request->corps,
-            'origin' => $request->origin,
-            'birthday' => dateeng(formatdatethai($request->birthday)),
-            'rank_date' => dateeng(formatdatethai($request->rankdate)),
-            'education' => $request->education,
-            'position_id' => $request->position_id
+        $request->validate([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'id_number' => 'required|digits:13',
+            'soldier_number' => 'digits:10',
+            'corps' => 'required',
+            'origin' => 'required',
+            'education' => 'required',
+            'position_id' => 'digits:12'
         ]);
+
+        Employee::where('id', $request->id)
+            ->update([
+                'rank' => $request->rank,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'id_number' => $request->id_number,
+                'soldier_number' => $request->soldier_number,
+                'corps' => $request->corps,
+                'origin' => $request->origin,
+                'birthday' => dateeng(formatdatethai($request->birthday)),
+                'rank_date' => dateeng(formatdatethai($request->rankdate)),
+                'education' => $request->education,
+                'position_id' => $request->position_id
+            ]);
+
+        return redirect()->route('employee_edit', ['id' => $request->id])->with('success', 'แก้ไขข้อมูลเรียบร้อย');
     }
 
     /**
@@ -142,6 +159,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Employee::find($id)->delete()) {
+            return redirect()->route('employee_index')->with('success', 'ลบข้อมูลเรียบร้อย');
+        }
     }
 }

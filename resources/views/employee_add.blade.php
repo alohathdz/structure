@@ -111,13 +111,13 @@
                         <div class="col-md-3">
                             <label for="document_date" class="form-label"><b>วันเกิด</b></label>
                             <input type="text" class="form-control" name="birthday" id="birthday"
-                                placeholder="เลือกวันเกิด" readonly>
+                                placeholder="เลือกวันเกิด" value="{{ old('birthday') }}" readonly>
                         </div>
 
                         <div class="col-md-3">
                             <label for="document_date" class="form-label"><b>วันที่ได้รับยศล่าสุด</b></label>
                             <input type="text" class="form-control" name="rankdate" id="rankdate"
-                                placeholder="เลือกวันที่ได้รับยศล่าสุด" readonly>
+                                placeholder="เลือกวันที่ได้รับยศล่าสุด" value="{{ old('rankdate') }}" readonly>
                         </div>
                         
                         <div class="col-md-6">

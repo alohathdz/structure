@@ -14,7 +14,7 @@
                             <label class="form-label" for="rank"><b>ยศ</b></label>
                             <select class="form-select" name="rank" required>
                                 <option value="" selected disabled hidden>เลือกยศ</option>
-                                <option value="พ.ท.">พันโท</option>
+                                <option value="พ.ท." {{ old('rank') == 'พ.ท.' ? 'selected' : '' }}>พันโท</option>
                                 <option value="พ.ต.">พันตรี</option>
                                 <option value="ร.อ.">ร้อยเอก</option>
                                 <option value="ร.ท.">ร้อยโท</option>

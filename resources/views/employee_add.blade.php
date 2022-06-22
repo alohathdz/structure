@@ -14,19 +14,20 @@
                             <label class="form-label" for="rank"><b>ยศ</b></label>
                             <select class="form-select" name="rank" required>
                                 <option value="" selected disabled hidden>เลือกยศ</option>
-                                <option value="พ.ท." {{ old('rank') == 'พ.ท.' ? 'selected' : '' }}>พันโท</option>
-                                <option value="พ.ต.">พันตรี</option>
-                                <option value="ร.อ.">ร้อยเอก</option>
-                                <option value="ร.ท.">ร้อยโท</option>
-                                <option value="ร.ต.">ร้อยตรี</option>
-                                <option value="จ.ส.อ.(พ.)">จ่าสิบเอก(พิเศษ)</option>
-                                <option value="จ.ส.อ.">จ่าสิบเอก</option>
-                                <option value="จ.ส.ท.">จ่าสิบโท</option>
-                                <option value="จ.ส.ต.">จ่าสิบตรี</option>
-                                <option value="ส.อ.">สิบเอก</option>
-                                <option value="ส.ท.">สิบโท</option>
-                                <option value="ส.ต.">สิบตรี</option>
-                                <option value="">นาย</option>
+                                <option value="พ.ท." {{ old('rank')=='พ.ท.' ? 'selected' : '' }}>พันโท</option>
+                                <option value="พ.ต." {{ old('rank')=='พ.ต.' ? 'selected' : '' }}>พันตรี</option>
+                                <option value="ร.อ." {{ old('rank')=='ร.อ.' ? 'selected' : '' }}>ร้อยเอก</option>
+                                <option value="ร.ท." {{ old('rank')=='ร.ท.' ? 'selected' : '' }}>ร้อยโท</option>
+                                <option value="ร.ต." {{ old('rank')=='ร.ต.' ? 'selected' : '' }}>ร้อยตรี</option>
+                                <option value="จ.ส.อ.(พ.)" {{ old('rank')=='จ.ส.อ.(พ.)' ? 'selected' : '' }}>
+                                    จ่าสิบเอก(พิเศษ)</option>
+                                <option value="จ.ส.อ." {{ old('rank')=='จ.ส.อ.' ? 'selected' : '' }}>จ่าสิบเอก</option>
+                                <option value="จ.ส.ท." {{ old('rank')=='จ.ส.ท.' ? 'selected' : '' }}>จ่าสิบโท</option>
+                                <option value="จ.ส.ต." {{ old('rank')=='จ.ส.ต.' ? 'selected' : '' }}>จ่าสิบตรี</option>
+                                <option value="ส.อ." {{ old('rank')=='ส.อ.' ? 'selected' : '' }}>สิบเอก</option>
+                                <option value="ส.ท." {{ old('rank')=='ส.ท.' ? 'selected' : '' }}>สิบโท</option>
+                                <option value="ส.ต." {{ old('rank')=='ส.ต.' ? 'selected' : '' }}>สิบตรี</option>
+                                <option value="นาย" {{ old('rank')=='นาย' ? 'selected' : '' }}>นาย</option>
                             </select>
                         </div>
 
@@ -78,10 +79,9 @@
                             <label class="form-label" for="corps"><b>เหล่า</b></label>
                             <select class="form-select @error('corps') is-invalid @enderror" name="corps" required>
                                 <option value="" selected disabled hidden>เลือกเหล่า</option>
-                                <option value="ม.">ม.</option>
-                                <option value="พ.">พ.</option>
-                                <option value="กง.">กง.</option>
-                                <option value="">ไม่จำกัดเหล่า</option>
+                                <option value="ม." {{ old('corps')=='ม.' ? 'selected' : '' }}>ม.</option>
+                                <option value="พ." {{ old('corps')=='พ.' ? 'selected' : '' }}>พ.</option>
+                                <option value="กง." {{ old('corps')=='กง.' ? 'selected' : '' }}>กง.</option>
                             </select>
                             @error('corps')
                             <span class="invalid-feedback" role="alert">
@@ -94,12 +94,13 @@
                             <label class="form-label" for="origin"><b>กำเนิด</b></label>
                             <select class="form-select @error('origin') is-invalid @enderror" name="origin" required>
                                 <option value="" selected disabled hidden>เลือกกำเนิด</option>
-                                <option value="นร.">นร.</option>
-                                <option value="นพท.">นพท.</option>
-                                <option value="นป.">นป.</option>
-                                <option value="นนส.">นนส.</option>
-                                <option value="นชท.">นชท.</option>
-                                <option value="กองหนุน">กองหนุน</option>
+                                <option value="นร." {{ old('origin')=='นร.' ? 'selected' : '' }}>นร.</option>
+                                <option value="นพท." {{ old('origin')=='นพท.' ? 'selected' : '' }}>นพท.</option>
+                                <option value="นป." {{ old('origin')=='นป.' ? 'selected' : '' }}>นป.</option>
+                                <option value="นนส." {{ old('origin')=='นนส.' ? 'selected' : '' }}>นนส.</option>
+                                <option value="นชท." {{ old('origin')=='นชท.' ? 'selected' : '' }}>นชท.</option>
+                                <option value="กองหนุน" {{ old('origin')=='กองหนุน.' ? 'selected' : '' }}>กองหนุน
+                                </option>
                             </select>
                             @error('origin')
                             <span class="invalid-feedback" role="alert">
@@ -119,21 +120,26 @@
                             <input type="text" class="form-control" name="rankdate" id="rankdate"
                                 placeholder="เลือกวันที่ได้รับยศล่าสุด" value="{{ old('rankdate') }}" readonly>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <label class="form-label" for="education"><b>วุฒิการศึกษา</b></label>
                             <select class="form-select @error('education') is-invalid @enderror" name="education"
                                 required>
                                 <option value="" selected disabled hidden>เลือกวุฒิการศึกษา</option>
-                                <option value="ม.ต้น">มัธยมศึกษาตอนต้น</option>
-                                <option value="ม.ปลาย">มัธยมศึกษาตอนปลาย</option>
-                                <option value="ปวช.">ปวช.</option>
-                                <option value="ปวส.">ปวส.</option>
-                                <option value="อนุปริญญา">อนุปริญญา</option>
-                                <option value="ป.ตรี">ปริญญาตรี</option>
-                                <option value="ป.โท">ปริญญาโท</option>
-                                <option value="ป.เอก">ปริญญาเอก</option>
-                                <option value="">อื่น ๆ</option>
+                                <option value="ม.ต้น" {{ old('education')=='ม.ต้น' ? 'selected' : '' }}>มัธยมศึกษาตอนต้น
+                                </option>
+                                <option value="ม.ปลาย" {{ old('education')=='ม.ปลาย' ? 'selected' : '' }}>
+                                    มัธยมศึกษาตอนปลาย</option>
+                                <option value="ปวช." {{ old('education')=='ปวช.' ? 'selected' : '' }}>ปวช.</option>
+                                <option value="ปวส." {{ old('education')=='ปวส.' ? 'selected' : '' }}>ปวส.</option>
+                                <option value="อนุปริญญา" {{ old('education')=='อนุปริญญา' ? 'selected' : '' }}>
+                                    อนุปริญญา</option>
+                                <option value="ป.ตรี" {{ old('education')=='ป.ตรี' ? 'selected' : '' }}>ปริญญาตรี
+                                </option>
+                                <option value="ป.โท" {{ old('education')=='ป.โท' ? 'selected' : '' }}>ปริญญาโท</option>
+                                <option value="ป.เอก" {{ old('education')=='ป.เอก' ? 'selected' : '' }}>ปริญญาเอก
+                                </option>
+                                <option value="อื่นๆ" {{ old('education')=='อื่นๆ' ? 'selected' : '' }}>อื่น ๆ</option>
                             </select>
                             @error('education')
                             <span class="invalid-feedback" role="alert">

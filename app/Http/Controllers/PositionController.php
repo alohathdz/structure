@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
@@ -19,8 +18,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $position = Position::all();
-        return view('position_show', compact('position'));
+        $data['positions'] = Position::all();
+        return view('positions.index', $data);
     }
 
     /**

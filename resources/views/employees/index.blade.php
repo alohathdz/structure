@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 @section('content')
 <div class="container-fluid">
-    <a href="{{ route('employee_create') }}" class="btn btn-primary btn-sm">เพิ่มกำลังพล</a>
+    <a href="{{ route('employees.create') }}" class="btn btn-primary btn-sm">เพิ่มกำลังพล</a>
     <hr class="my-2">
     <table class="table table-striped table-bordered table-hover align-middle text-center" id="myTable">
         <thead>
@@ -24,20 +24,26 @@
             @php
             $i = 0;
             @endphp
-            @foreach ($employee as $row)
+            @foreach ($employees as $employee)
             <tr>
                 <td>{{ ++$i }}</td>
-                <td>{{ $row->rank }}</td>
-                <td class="text-start">{{ $row->firstname }}</td>
-                <td class="text-start">{{ $row->lastname }}</td>
-                <td>{{ $row->id_number }}</td>
-                <td>{{ $row->soldier_number }}</td>
-                <td>{{ $row->corps }}</td>
-                <td>{{ $row->origin }}</td>
-                <td>{{ age($row->birthday) }}</td>
-                <td>{{ $row->education }}</td>
-                <td><a href="{{ route('employee_edit', ['id' => $row->id]) }}"
-                        class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;<a href="{{ route('employee_destroy', ['id' => $row->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('คุณต้องการลบข้อมูล ใช่หรือไม่ ?')">ลบ</a>
+                <td>{{ $employee->rank }}</td>
+                <td class="text-start">{{ $employee->firstname }}</td>
+                <td class="text-start">{{ $employee->lastname }}</td>
+                <td>{{ $employee->id_number }}</td>
+                <td>{{ $employee->soldier_number }}</td>
+                <td>{{ $employee->corps }}</td>
+                <td>{{ $employee->origin }}</td>
+                <td>{{ age($employee->birthday) }}</td>
+                <td>{{ $employee->education }}</td>
+                <td>
+                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
+                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('คุณต้องการลบข้อมูล ใช่หรือไม่ ?')">ลบ</button>
+                    </form>
                 </td>
                 @endforeach
         </tbody>

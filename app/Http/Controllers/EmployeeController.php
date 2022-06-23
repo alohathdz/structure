@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::orderByRaw("CASE rank WHEN 'พ.ท.' THEN 1 
+        $data['employees'] = Employee::orderByRaw("CASE rank WHEN 'พ.ท.' THEN 1 
         WHEN 'พ.ต.' THEN 2 
         WHEN 'ร.อ.' THEN 3 
         WHEN 'ร.ท.' THEN 4 
@@ -29,7 +34,7 @@ class EmployeeController extends Controller
         WHEN 'ส.ท.' THEN 11 
         WHEN 'ส.ต.' THEN 12 
         ELSE 13 END")->get();
-        return view('employee_show', compact('employee'));
+        return view('employees.index', $data);
     }
 
     /**
@@ -43,7 +48,7 @@ class EmployeeController extends Controller
             $query->select('position_id')->from('employees');
         })->where('status', true)->get();
 
-        return view('employee_add', compact('position'));
+        return view('employees.create', compact('position'));
     }
 
     /**
@@ -80,7 +85,7 @@ class EmployeeController extends Controller
                 'position_id' => $request->position_id
             ]);
 
-            return redirect()->route('employee_index')->with('success', 'เพิ่มข้อมูลกำลังพลเรียบร้อย');
+            return redirect()->route('employees.index')->with('success', 'เพิ่มข้อมูลกำลังพลเรียบร้อย');
         } catch (ErrorException $e) {
             return $e;
         }
@@ -103,14 +108,15 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        if (Employee::find($id)) {
-            $emp = Employee::find($id);
-            return view('employee_edit', compact('emp'));
-        } else {
-            return redirect()->route('employee_index')->with('error', 'ไม่พบข้อมูล');
-        }
+        return view('employees.edit', compact('employee'));
+        // if (Employee::find($id)) {
+        //     $emp = Employee::find($id);
+        //     return view('employees.edit', compact('emp'));
+        // } else {
+        //     return redirect()->route('employees.index')->with('error', 'ไม่พบข้อมูล');
+        // }
     }
 
     /**
@@ -148,7 +154,7 @@ class EmployeeController extends Controller
                 'position_id' => $request->position_id
             ]);
 
-        return redirect()->route('employee_edit', ['id' => $request->id])->with('success', 'แก้ไขข้อมูลเรียบร้อย');
+        return redirect()->route('employees.edit', ['id' => $request->id])->with('success', 'แก้ไขข้อมูลเรียบร้อย');
     }
 
     /**
@@ -160,7 +166,7 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         if (Employee::find($id)->delete()) {
-            return redirect()->route('employee_index')->with('success', 'ลบข้อมูลเรียบร้อย');
+            return redirect()->route('employees.index')->with('success', 'ลบข้อมูลเรียบร้อย');
         }
     }
 }

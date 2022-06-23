@@ -17,20 +17,20 @@
             @php
                 $i = 0;
             @endphp
-            @foreach ($position as $row)
-            <tr @if ($row->status == 0)
+            @foreach ($positions as $position)
+            <tr @if ($position->status == 0)
                 class="table-dark"
                 @endif>
                 <th scope="row">{{ ++$i }}</th>
-                <td class="text-start">{{ $row->shortname }}<br>( {{ $row->name }} )<br>{{ $row->id }}</td>
-                <td>{{ $row->expert }}</td>
-                <td>{{ $row->rate }}</td>
-                <td>{{ $row->corps }}</td>
+                <td class="text-start">{{ $position->shortname }}<br>( {{ $position->name }} )<br>{{ $position->id }}</td>
+                <td>{{ $position->expert }}</td>
+                <td>{{ $position->rate }}</td>
+                <td>{{ $position->corps }}</td>
                 <td>
                     @php
                     $employee = ('App\Models\Employee')::select('firstname', 'lastname', 'id_number', 'soldier_number')
                     ->join('positions', 'employees.position_id', '=', 'positions.id')
-                    ->where('position_id', $row->id)
+                    ->where('position_id', $position->id)
                     ->get();
                     @endphp
                     @if (!$employee->first())

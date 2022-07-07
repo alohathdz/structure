@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\Position;
 use ErrorException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -13,7 +14,7 @@ class EmployeeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -168,5 +169,30 @@ class EmployeeController extends Controller
         if (Employee::find($id)->delete()) {
             return redirect()->route('employees.index')->with('success', 'ลบข้อมูลเรียบร้อย');
         }
+    }
+
+    public function report()
+    {
+        $data['report'] = Employee::select('rank', 'education', DB::raw("COUNT(id) as num"))
+            ->whereIn('education', ['อื่นๆ', 'ม.ต้น', 'ม.ปลาย', 'ปวช.', 'ปวส.', 'อนุปริญญา', 'ป.ตรี', 'ป.โท', 'ป.เอก'])
+            ->orderByRaw("CASE rank WHEN 'พ.ท.' THEN 1 
+            WHEN 'พ.ต.' THEN 2 
+            WHEN 'ร.อ.' THEN 3 
+            WHEN 'ร.ท.' THEN 4 
+            WHEN 'ร.ต.' THEN 5 
+            WHEN 'จ.ส.อ.(พ.)' THEN 6 
+            WHEN 'จ.ส.อ.' THEN 7 
+            WHEN 'จ.ส.ท.' THEN 8 
+            WHEN 'จ.ส.ต.' THEN 9 
+            WHEN 'ส.อ.' THEN 10 
+            WHEN 'ส.ท.' THEN 11 
+            WHEN 'ส.ต.' THEN 12 
+            ELSE 13 END")
+            ->groupBy('rank', 'education')
+            ->get();
+
+        //return $data;
+
+        return view('employees.report', $data);
     }
 }

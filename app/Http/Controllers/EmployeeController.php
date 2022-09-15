@@ -178,7 +178,7 @@ class EmployeeController extends Controller
     public function report()
     {
         $data['report'] = Employee::select('rank', 'education', DB::raw("COUNT(id) as num"))
-            ->whereIn('education', ['อื่นๆ', 'ม.ต้น', 'ม.ปลาย', 'ปวช.', 'ปวส.', 'อนุปริญญา', 'ป.ตรี', 'ป.โท', 'ป.เอก'])
+            ->whereIn('education', ['อื่น ๆ', 'มัธยมศึกษาตอนต้น', 'มัธยมศึกษาตอนปลาย', 'ประกาศนียบัตรวิชาชีพ', 'ประกาศนียบัตรวิชาชีพชั้นสูง', 'อนุปริญญา', 'ปริญญาตรี', 'ปริญญาโท', 'ปริญญาเอก'])
             ->orderByRaw("CASE rank WHEN 'พ.ท.' THEN 1 
             WHEN 'พ.ต.' THEN 2 
             WHEN 'ร.อ.' THEN 3 
@@ -194,6 +194,71 @@ class EmployeeController extends Controller
             ELSE 13 END")
             ->groupBy('rank', 'education')
             ->get();
+
+        $data['punto_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'พ.ท.')->count();
+        $data['punto_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'พ.ท.')->count();
+        $data['punto_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'พ.ท.')->count();
+        $data['punto_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'พ.ท.')->count();
+        
+        $data['puntee_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'พ.ต.')->count();
+        $data['puntee_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'พ.ต.')->count();
+        $data['puntee_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'พ.ต.')->count();
+        $data['puntee_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'พ.ต.')->count();
+
+        $data['royaek_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'ร.อ.')->count();
+        $data['royaek_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'ร.อ.')->count();
+        $data['royaek_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'ร.อ.')->count();
+        $data['royaek_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'ร.อ.')->count();
+
+        $data['royto_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'ร.ท.')->count();
+        $data['royto_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'ร.ท.')->count();
+        $data['royto_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'ร.ท.')->count();
+        $data['royto_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'ร.ท.')->count();
+
+        $data['roytee_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'ร.ต.')->count();
+        $data['roytee_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'ร.ต.')->count();
+        $data['roytee_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'ร.ต.')->count();
+        $data['roytee_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'ร.ต.')->count();
+
+        $data['japor_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'จ.ส.อ.(พ.)')->count();
+        $data['japor_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'จ.ส.อ.(พ.)')->count();
+        $data['japor_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'จ.ส.อ.(พ.)')->count();
+        $data['japor_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'จ.ส.อ.(พ.)')->count();
+
+        $data['jasibaek_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'จ.ส.อ.')->count();
+        $data['jasibaek_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'จ.ส.อ.')->count();
+        $data['jasibaek_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'จ.ส.อ.')->count();
+        $data['jasibaek_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'จ.ส.อ.')->count();
+
+        $data['jasibto_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'จ.ส.ท.')->count();
+        $data['jasibto_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'จ.ส.ท.')->count();
+        $data['jasibto_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'จ.ส.ท.')->count();
+        $data['jasibto_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'จ.ส.ท.')->count();
+
+        $data['jasibtee_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'จ.ส.ต.')->count();
+        $data['jasibtee_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'จ.ส.ต.')->count();
+        $data['jasibtee_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'จ.ส.ต.')->count();
+        $data['jasibtee_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'จ.ส.ต.')->count();
+
+        $data['sibaek_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'ส.อ.')->count();
+        $data['sibaek_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'ส.อ.')->count();
+        $data['sibaek_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'ส.อ.')->count();
+        $data['sibaek_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'ส.อ.')->count();
+
+        $data['sibto_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'ส.ท.')->count();
+        $data['sibto_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'ส.ท.')->count();
+        $data['sibto_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'ส.ท.')->count();
+        $data['sibto_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'ส.ท.')->count();
+
+        $data['sibtee_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'ส.ต.')->count();
+        $data['sibtee_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'ส.ต.')->count();
+        $data['sibtee_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'ส.ต.')->count();
+        $data['sibtee_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'ส.ต.')->count();
+
+        $data['poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->count();
+        $data['porto'] = Employee::where('education', '=', 'ปริญญาโท')->count();
+        $data['portee'] = Employee::where('education', '=', 'ปริญญาตรี')->count();
+        $data['under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->count();
 
         //return $data;
 

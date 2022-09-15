@@ -23,8 +23,8 @@
                     <strong>สรุปรายงาน</strong>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary btn-sm"><i
-                            class="bi bi-file-earmark-text"></i> สถานภาพ</a>
+                    <a href="{{ route('employees.education') }}" class="btn btn-primary btn-sm"><i
+                            class="bi bi-file-earmark-text"></i> ข้อมูลคุณวุฒิ</a>
                 </div>
             </div>
         </div>

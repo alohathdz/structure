@@ -262,6 +262,6 @@ class EmployeeController extends Controller
 
         //return $data;
 
-        return view('employees.report', $data);
+        return view('employees.education', $data);
     }
 }

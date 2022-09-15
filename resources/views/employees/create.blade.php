@@ -3,6 +3,12 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-7">
+            @if (session('fail'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ Session::get('fail') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="card">
                 <h5 class="card-header text-center">เพิ่มข้อมูลกำลังพล</h5>
                 <div class="card-body">
@@ -56,7 +62,7 @@
                         <div class="col-md-3">
                             <label for="id_number" class="form-label"><b>เลขประจำตัวประชาชน</b></label>
                             <input type="text" class="form-control @error('id_number') is-invalid @enderror"
-                                name="id_number" value="{{ old('id_number') }}">
+                                name="id_number" value="{{ old('id_number') }}" maxlength="13">
                             @error('id_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -67,7 +73,7 @@
                         <div class="col-md-3">
                             <label for="soldier_number" class="form-label"><b>เลขประจำตัวทหาร</b></label>
                             <input type="text" class="form-control @error('soldier_number') is-invalid @enderror"
-                                name="soldier_number" value="{{ old('soldier_number') }}">
+                                name="soldier_number" value="{{ old('soldier_number') }}" maxlength="10">
                             @error('soldier_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -126,20 +132,20 @@
                             <select class="form-select @error('education') is-invalid @enderror" name="education"
                                 required>
                                 <option value="" selected disabled hidden>เลือกวุฒิการศึกษา</option>
-                                <option value="ม.ต้น" {{ old('education')=='ม.ต้น' ? 'selected' : '' }}>มัธยมศึกษาตอนต้น
+                                <option value="มัธยมศึกษาตอนต้น" {{ old('education')=='มัธยมศึกษาตอนต้น' ? 'selected' : '' }}>มัธยมศึกษาตอนต้น
                                 </option>
-                                <option value="ม.ปลาย" {{ old('education')=='ม.ปลาย' ? 'selected' : '' }}>
+                                <option value="มัธยมศึกษาตอนปลาย" {{ old('education')=='มัธยมศึกษาตอนปลาย' ? 'selected' : '' }}>
                                     มัธยมศึกษาตอนปลาย</option>
-                                <option value="ปวช." {{ old('education')=='ปวช.' ? 'selected' : '' }}>ปวช.</option>
-                                <option value="ปวส." {{ old('education')=='ปวส.' ? 'selected' : '' }}>ปวส.</option>
+                                <option value="ประกาศนียบัตรวิชาชีพ" {{ old('education')=='ประกาศนียบัตรวิชาชีพ' ? 'selected' : '' }}>ประกาศนียบัตรวิชาชีพ</option>
+                                <option value="ประกาศนียบัตรวิชาชีพชั้นสูง" {{ old('education')=='ประกาศนียบัตรวิชาชีพชั้นสูง' ? 'selected' : '' }}>ประกาศนียบัตรวิชาชีพชั้นสูง</option>
                                 <option value="อนุปริญญา" {{ old('education')=='อนุปริญญา' ? 'selected' : '' }}>
                                     อนุปริญญา</option>
-                                <option value="ป.ตรี" {{ old('education')=='ป.ตรี' ? 'selected' : '' }}>ปริญญาตรี
+                                <option value="ปริญญาตรี" {{ old('education')=='ปริญญาตรี' ? 'selected' : '' }}>ปริญญาตรี
                                 </option>
-                                <option value="ป.โท" {{ old('education')=='ป.โท' ? 'selected' : '' }}>ปริญญาโท</option>
-                                <option value="ป.เอก" {{ old('education')=='ป.เอก' ? 'selected' : '' }}>ปริญญาเอก
+                                <option value="ปริญญาโท" {{ old('education')=='ปริญญาโท' ? 'selected' : '' }}>ปริญญาโท</option>
+                                <option value="ปริญญาเอก" {{ old('education')=='ปริญญาเอก' ? 'selected' : '' }}>ปริญญาเอก
                                 </option>
-                                <option value="อื่นๆ" {{ old('education')=='อื่นๆ' ? 'selected' : '' }}>อื่น ๆ</option>
+                                <option value="อื่น ๆ" {{ old('education')=='อื่นๆ' ? 'selected' : '' }}>อื่น ๆ</option>
                             </select>
                             @error('education')
                             <span class="invalid-feedback" role="alert">
@@ -151,7 +157,7 @@
                         <div class="col-md-3">
                             <label for="position_id" class="form-label"><b>เลขตำแหน่ง</b></label>
                             <input type="text" class="form-control @error('position_id') is-invalid @enderror"
-                                name="position_id" value="{{ old('position_id') }}">
+                                name="position_id" value="{{ old('position_id') }}" maxlength="12">
                             @error('position_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

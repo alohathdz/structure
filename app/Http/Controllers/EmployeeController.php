@@ -72,21 +72,25 @@ class EmployeeController extends Controller
                 'position_id' => 'digits:12|unique:employees'
             ]);
 
-            Employee::create([
-                'rank' => $request->rank,
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
-                'id_number' => $request->id_number,
-                'soldier_number' => $request->soldier_number,
-                'corps' => $request->corps,
-                'origin' => $request->origin,
-                'birthday' => dateeng(formatdatethai($request->birthday)),
-                'rank_date' => dateeng(formatdatethai($request->rankdate)),
-                'education' => $request->education,
-                'position_id' => $request->position_id
-            ]);
+            if (Position::where('id', '=', $request->id)->first()) {
+                Employee::create([
+                    'rank' => $request->rank,
+                    'firstname' => $request->firstname,
+                    'lastname' => $request->lastname,
+                    'id_number' => $request->id_number,
+                    'soldier_number' => $request->soldier_number,
+                    'corps' => $request->corps,
+                    'origin' => $request->origin,
+                    'birthday' => dateeng(formatdatethai($request->birthday)),
+                    'rank_date' => dateeng(formatdatethai($request->rankdate)),
+                    'education' => $request->education,
+                    'position_id' => $request->position_id
+                ]);
 
-            return redirect()->route('employees.index')->with('success', 'เพิ่มข้อมูลกำลังพลเรียบร้อย');
+                return redirect()->route('employees.index')->with('success', 'เพิ่มข้อมูลกำลังพลเรียบร้อย');
+            } else {
+                return redirect()->route('employees.create')->with('fail', 'เลขที่ตำแหน่งไม่ถูกต้อง');
+            }
         } catch (ErrorException $e) {
             return $e;
         }

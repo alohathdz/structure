@@ -25,6 +25,8 @@
                 <div class="card-body">
                     <a href="{{ route('employees.education') }}" class="btn btn-primary btn-sm"><i
                             class="bi bi-file-earmark-text"></i> ข้อมูลคุณวุฒิ</a>
+                    <a href="{{ route('positions.null') }}" class="btn btn-primary btn-sm"><i
+                            class="bi bi-file-earmark-text"></i> ตำแหน่งว่าง</a>
                 </div>
             </div>
         </div>

@@ -14,13 +14,22 @@
             </tr>
         </thead>
         <tbody>
+            @php
+            $i = 1;
+            @endphp
+            @foreach ($report as $position)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $i++ }}</td>
+                <td>{{ $position->shortname }}</td>
+                <td>{{ $position->corps }}</td>
+                <td>{{ $position->expert }}</td>
+                <td>{{ $position->rate }}</td>
+                <td>{{ $position->num }}</td>
+            </tr>
+            @endforeach
+            <tr class="fw-bold">
+                <td colspan="5">รวม</td>
+                <td>{{ $report->sum('num') }}</td>
             </tr>
         </tbody>
     </table>

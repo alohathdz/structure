@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PositionController extends Controller
 {
@@ -86,5 +87,23 @@ class PositionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function report()
+    {
+        $data['report'] = Position::select('shortname', 'expert', 'rate', 'corps', DB::raw('COUNT(*) as num'))
+            ->where('status', '=', 1)
+            ->whereNotIn('id', (function ($query) {
+                $query->select('position_id')->from('employees');
+            }))
+            ->whereNotIn('rate', ['พ.ท.', 'พ.ต.', 'ร.อ.', 'ร.ท.', 'ร.ต.'])
+            ->groupBy('shortname', 'expert', 'rate', 'corps')
+            ->orderByRaw("CASE rate WHEN 'จ.(พ.)' THEN 1 
+            WHEN 'จ.' THEN 2 
+            WHEN 'ส.อ.' THEN 3 
+            ELSE 13 END")
+            ->get();
+
+        return view('positions.null', $data);
     }
 }

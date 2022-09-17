@@ -5,7 +5,7 @@
     <!-- Menu จัดการข้อมูลพื้นฐาน -->
     <div class="row justify-content-center text-center">
         <div class="col-sm-4">
-            <div class="card border-primary">
+            <div class="card bg-light">
                 <div class="card-header">
                     <strong>ข้อมูลพื้นฐาน</strong>
                 </div>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col-sm-5">
-            <div class="card border-primary">
+            <div class="card bg-light">
                 <div class="card-header">
                     <strong>สรุปรายงาน</strong>
                 </div>
@@ -27,6 +27,8 @@
                             class="bi bi-file-earmark-text"></i> ข้อมูลคุณวุฒิ</a>
                     <a href="{{ route('positions.null') }}" class="btn btn-primary btn-sm"><i
                             class="bi bi-file-earmark-text"></i> ตำแหน่งว่าง</a>
+                            <a href="{{ route('employees.age') }}" class="btn btn-primary btn-sm"><i
+                                class="bi bi-file-earmark-text"></i> อายุ</a>
                 </div>
             </div>
         </div>

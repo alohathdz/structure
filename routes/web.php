@@ -27,7 +27,8 @@ Route::resources([
     'positions' => PositionController::class,
 ]);
 
-Route::get('/report/education', [EmployeeController::class, 'report'])->name('employees.education');
+Route::get('/report/education', [EmployeeController::class, 'education'])->name('employees.education');
+Route::get('/report/age', [EmployeeController::class, 'age'])->name('employees.age');
 Route::get('/report/position', [PositionController::class, 'report'])->name('positions.null');
 
 Route::get('/test', function(){

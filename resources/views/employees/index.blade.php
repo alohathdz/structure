@@ -1,53 +1,66 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 @section('content')
-<div class="container-fluid">
-    <a href="{{ route('employees.create') }}" class="btn btn-primary btn-sm">เพิ่มกำลังพล</a>
-    <hr class="my-2">
-    <table class="table table-striped table-bordered table-hover align-middle text-center" id="myTable">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">ลำดับ</th>
-                <th scope="col" class="text-center">ยศ</th>
-                <th scope="col" class="text-center">ชื่อ</th>
-                <th scope="col" class="text-center">สกุล</th>
-                <th scope="col" class="text-center">เลขประจำตัวประชาชน</th>
-                <th scope="col" class="text-center">เลขประจำตัวทหาร</th>
-                <th scope="col" class="text-center">เหล่า</th>
-                <th scope="col" class="text-center">กำเนิด</th>
-                <th scope="col" class="text-center">วันเกิด</th>
-                <th scope="col" class="text-center">วุฒิการศึกษา</th>
-                <th scope="col" class="text-center">จัดการ</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-            $i = 0;
-            @endphp
-            @foreach ($employees as $employee)
-            <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $employee->rank }}</td>
-                <td class="text-start">{{ $employee->firstname }}</td>
-                <td class="text-start">{{ $employee->lastname }}</td>
-                <td>{{ $employee->id_number }}</td>
-                <td>{{ $employee->soldier_number }}</td>
-                <td>{{ $employee->corps }}</td>
-                <td>{{ $employee->origin }}</td>
-                <td>{{ age($employee->birthday) }}</td>
-                <td>{{ $employee->education }}</td>
-                <td>
-                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
-                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="return confirm('คุณต้องการลบข้อมูล ใช่หรือไม่ ?')">ลบ</button>
-                    </form>
-                </td>
-                @endforeach
-        </tbody>
-    </table>
+<div class="container">
+    <div class="row justify-content-center bg-light p-2 rounded">
+        <div class="d-flex gap-2">
+            <div class="me-auto">
+                <h5>กำลังพล</h5>
+            </div>
+            <div class="ms-auto">
+                <!-- ปุ่ม Home -->
+                <a href="{{ route('home') }}" class="btn btn-primary btn-sm"><i class="bi bi-house-door"></i></a>
+                <!-- ปุ่มเพิ่ม -->
+                <a href="{{ route('employees.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i></a>
+            </div>
+        </div>
+        <hr>
+        <table class="table table-secondary table-striped table-bordered table-hover align-middle text-center" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">ลำดับ</th>
+                    <th scope="col" class="text-center">ยศ</th>
+                    <th scope="col" class="text-center">ชื่อ</th>
+                    <th scope="col" class="text-center">สกุล</th>
+                    <th scope="col" class="text-center">เลขประจำตัวประชาชน</th>
+                    <th scope="col" class="text-center">เลขประจำตัวทหาร</th>
+                    <th scope="col" class="text-center">เหล่า</th>
+                    <th scope="col" class="text-center">กำเนิด</th>
+                    <th scope="col" class="text-center">วันเกิด</th>
+                    <th scope="col" class="text-center">วุฒิการศึกษา</th>
+                    <th scope="col" class="text-center">จัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                $i = 0;
+                @endphp
+                @foreach ($employees as $employee)
+                <tr>
+                    <td>{{ ++$i }}</td>
+                    <td>{{ $employee->rank }}</td>
+                    <td class="text-start">{{ $employee->firstname }}</td>
+                    <td class="text-start">{{ $employee->lastname }}</td>
+                    <td>{{ $employee->id_number }}</td>
+                    <td>{{ $employee->soldier_number }}</td>
+                    <td>{{ $employee->corps }}</td>
+                    <td>{{ $employee->origin }}</td>
+                    <td>{{ age($employee->birthday) }}</td>
+                    <td>{{ $employee->education }}</td>
+                    <td>
+                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
+                            <a href="{{ route('employees.edit', $employee->id) }}"
+                                class="btn btn-primary btn-sm">แก้ไข</a>&nbsp;
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('คุณต้องการลบข้อมูล ใช่หรือไม่ ?')">ลบ</button>
+                        </form>
+                    </td>
+                    @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- JQuery -->

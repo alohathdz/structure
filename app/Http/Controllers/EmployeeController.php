@@ -175,9 +175,9 @@ class EmployeeController extends Controller
         }
     }
 
-    public function report()
+    public function education()
     {
-        $data['report'] = Employee::select('rank', 'education', DB::raw("COUNT(id) as num"))
+        /*$data['report'] = Employee::select('rank', 'education', DB::raw("COUNT(id) as num"))
             ->whereIn('education', ['อื่น ๆ', 'มัธยมศึกษาตอนต้น', 'มัธยมศึกษาตอนปลาย', 'ประกาศนียบัตรวิชาชีพ', 'ประกาศนียบัตรวิชาชีพชั้นสูง', 'อนุปริญญา', 'ปริญญาตรี', 'ปริญญาโท', 'ปริญญาเอก'])
             ->orderByRaw("CASE rank WHEN 'พ.ท.' THEN 1 
             WHEN 'พ.ต.' THEN 2 
@@ -193,7 +193,7 @@ class EmployeeController extends Controller
             WHEN 'ส.ต.' THEN 12 
             ELSE 13 END")
             ->groupBy('rank', 'education')
-            ->get();
+            ->get();*/
 
         $data['punto_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'พ.ท.')->count();
         $data['punto_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'พ.ท.')->count();
@@ -263,5 +263,13 @@ class EmployeeController extends Controller
         //return $data;
 
         return view('employees.education', $data);
+    }
+    
+    public function age()
+    {
+        $data['ranks'] = Employee::select('rank')->get();
+        $data['age18_26'] = Employee::whereBetween(DB::raw('(YEAR(NOW()) - YEAR(birthday))'), [18,29])->get();
+
+        return view('employees.age', $data);
     }
 }

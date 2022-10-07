@@ -167,7 +167,7 @@
 
                         <div class="col-md-12 text-center">
                             <button class="btn btn-sm btn-primary" type="submit">บันทึก</button>
-                            <a href="#" class="btn btn-sm btn-danger">ยกเลิก</a>
+                            <a href="{{ route('employees.index') }}" class="btn btn-sm btn-danger">ยกเลิก</a>
                         </div>
                     </form>
                 </div>

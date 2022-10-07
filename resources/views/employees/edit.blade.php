@@ -19,10 +19,14 @@
                                 <option value="ร.อ." @if ($employee->rank == "ร.อ.") selected @endif>ร้อยเอก</option>
                                 <option value="ร.ท." @if ($employee->rank == "ร.ท.") selected @endif>ร้อยโท</option>
                                 <option value="ร.ต." @if ($employee->rank == "ร.ต.") selected @endif>ร้อยตรี</option>
-                                <option value="จ.ส.อ.(พ.)" @if ($employee->rank == "จ.ส.อ.(พ.)") selected @endif>จ่าสิบเอก(พิเศษ)</option>
-                                <option value="จ.ส.อ." @if ($employee->rank == "จ.ส.อ.") selected @endif>จ่าสิบเอก</option>
-                                <option value="จ.ส.ท." @if ($employee->rank == "จ.ส.ท.") selected @endif>จ่าสิบโท</option>
-                                <option value="จ.ส.ต." @if ($employee->rank == "จ.ส.ต.") selected @endif>จ่าสิบตรี</option>
+                                <option value="จ.ส.อ.(พ.)" @if ($employee->rank == "จ.ส.อ.(พ.)") selected
+                                    @endif>จ่าสิบเอก(พิเศษ)</option>
+                                <option value="จ.ส.อ." @if ($employee->rank == "จ.ส.อ.") selected @endif>จ่าสิบเอก
+                                </option>
+                                <option value="จ.ส.ท." @if ($employee->rank == "จ.ส.ท.") selected @endif>จ่าสิบโท
+                                </option>
+                                <option value="จ.ส.ต." @if ($employee->rank == "จ.ส.ต.") selected @endif>จ่าสิบตรี
+                                </option>
                                 <option value="ส.อ." @if ($employee->rank == "ส.อ.") selected @endif>สิบเอก</option>
                                 <option value="ส.ท." @if ($employee->rank == "ส.ท.") selected @endif>สิบโท</option>
                                 <option value="ส.ต." @if ($employee->rank == "ส.ต.") selected @endif>สิบตรี</option>
@@ -97,7 +101,8 @@
                                 <option value="นป." @if ($employee->origin == "นป.") selected @endif>นป.</option>
                                 <option value="นนส." @if ($employee->origin == "นนส.") selected @endif>นนส.</option>
                                 <option value="นชท." @if ($employee->origin == "นชท.") selected @endif>นชท.</option>
-                                <option value="กองหนุน" @if ($employee->origin == "กองหนุน") selected @endif>กองหนุน</option>
+                                <option value="กองหนุน" @if ($employee->origin == "กองหนุน") selected @endif>กองหนุน
+                                </option>
                             </select>
                             @error('origin')
                             <span class="invalid-feedback" role="alert">
@@ -117,19 +122,25 @@
                             <input type="text" class="form-control" name="rankdate" id="rankdate"
                                 value="{{ formatdateeng($employee->rank_date) }}" readonly>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <label class="form-label" for="education"><b>วุฒิการศึกษา</b></label>
                             <select class="form-select @error('education') is-invalid @enderror" name="education"
                                 required>
-                                <option value="ม.ต้น" @if ($employee->education == "ม.ต้น") selected @endif>มัธยมศึกษาตอนต้น</option>
-                                <option value="ม.ปลาย" @if ($employee->education == "ม.ปลาย") selected @endif>มัธยมศึกษาตอนปลาย</option>
+                                <option value="ม.ต้น" @if ($employee->education == "ม.ต้น") selected
+                                    @endif>มัธยมศึกษาตอนต้น</option>
+                                <option value="ม.ปลาย" @if ($employee->education == "ม.ปลาย") selected
+                                    @endif>มัธยมศึกษาตอนปลาย</option>
                                 <option value="ปวช." @if ($employee->education == "ปวช.") selected @endif>ปวช.</option>
                                 <option value="ปวส." @if ($employee->education == "ปวส.") selected @endif>ปวส.</option>
-                                <option value="อนุปริญญา" @if ($employee->education == "อนุปริญญา") selected @endif>อนุปริญญา</option>
-                                <option value="ป.ตรี" @if ($employee->education == "ป.ตรี") selected @endif>ปริญญาตรี</option>
-                                <option value="ป.โท" @if ($employee->education == "ป.โท") selected @endif>ปริญญาโท</option>
-                                <option value="ป.เอก" @if ($employee->education == "ป.เอก") selected @endif>ปริญญาเอก</option>
+                                <option value="อนุปริญญา" @if ($employee->education == "อนุปริญญา") selected
+                                    @endif>อนุปริญญา</option>
+                                <option value="ป.ตรี" @if ($employee->education == "ป.ตรี") selected @endif>ปริญญาตรี
+                                </option>
+                                <option value="ป.โท" @if ($employee->education == "ป.โท") selected @endif>ปริญญาโท
+                                </option>
+                                <option value="ป.เอก" @if ($employee->education == "ป.เอก") selected @endif>ปริญญาเอก
+                                </option>
                                 <option value="" @if ($employee->education == "") selected @endif>อื่น ๆ</option>
                             </select>
                             @error('education')

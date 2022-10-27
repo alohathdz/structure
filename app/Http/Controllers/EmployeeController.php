@@ -72,7 +72,7 @@ class EmployeeController extends Controller
                 'position_id' => 'digits:12|unique:employees'
             ]);
 
-            if (Position::where('id', '=', $request->id)->first()) {
+            if (Employee::where('position_id', '=', $request->position_id)->first() == null) {
                 Employee::create([
                     'rank' => $request->rank,
                     'firstname' => $request->firstname,
@@ -134,6 +134,8 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $position = Employee::select('position_id')->where('id', '=', $id)->first();
+
         $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'required|string',
@@ -145,22 +147,45 @@ class EmployeeController extends Controller
             'position_id' => 'digits:12'
         ]);
 
-        Employee::where('id', $id)
-            ->update([
-                'rank' => $request->rank,
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
-                'id_number' => $request->id_number,
-                'soldier_number' => $request->soldier_number,
-                'corps' => $request->corps,
-                'origin' => $request->origin,
-                'birthday' => dateeng(formatdatethai($request->birthday)),
-                'rank_date' => dateeng(formatdatethai($request->rankdate)),
-                'education' => $request->education,
-                'position_id' => $request->position_id
-            ]);
+        if ($request->position_id != $position->position_id) {
+            if (Employee::where('position_id', '=', $request->position_id)->first() == null) {
+                Employee::where('id', $id)
+                    ->update([
+                        'rank' => $request->rank,
+                        'firstname' => $request->firstname,
+                        'lastname' => $request->lastname,
+                        'id_number' => $request->id_number,
+                        'soldier_number' => $request->soldier_number,
+                        'corps' => $request->corps,
+                        'origin' => $request->origin,
+                        'birthday' => dateeng(formatdatethai($request->birthday)),
+                        'rank_date' => dateeng(formatdatethai($request->rankdate)),
+                        'education' => $request->education,
+                        'position_id' => $request->position_id
+                    ]);
 
-        return redirect()->route('employees.edit', $id)->with('success', 'แก้ไขข้อมูลเรียบร้อย');
+                return redirect()->route('employees.edit', $id)->with('success', 'แก้ไขข้อมูลเรียบร้อย');
+            } else {
+                return redirect()->route('employees.edit', $id)->with('fail', 'เลขที่ตำแหน่งไม่ถูกต้อง');
+            }
+        } else {
+            Employee::where('id', $id)
+                ->update([
+                    'rank' => $request->rank,
+                    'firstname' => $request->firstname,
+                    'lastname' => $request->lastname,
+                    'id_number' => $request->id_number,
+                    'soldier_number' => $request->soldier_number,
+                    'corps' => $request->corps,
+                    'origin' => $request->origin,
+                    'birthday' => dateeng(formatdatethai($request->birthday)),
+                    'rank_date' => dateeng(formatdatethai($request->rankdate)),
+                    'education' => $request->education,
+                    'position_id' => $request->position_id
+                ]);
+
+                return redirect()->route('employees.edit', $id)->with('success', 'แก้ไขข้อมูลเรียบร้อย');
+        }
     }
 
     /**
@@ -182,7 +207,7 @@ class EmployeeController extends Controller
         $data['punto_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'พ.ท.')->count();
         $data['punto_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'พ.ท.')->count();
         $data['punto_under'] = Employee::whereNotIn('education', ['ปริญญาเอก', 'ปริญญาโท', 'ปริญญาตรี'])->where('rank', '=', 'พ.ท.')->count();
-        
+
         $data['puntee_poraek'] = Employee::where('education', '=', 'ปริญญาเอก')->where('rank', '=', 'พ.ต.')->count();
         $data['puntee_porto'] = Employee::where('education', '=', 'ปริญญาโท')->where('rank', '=', 'พ.ต.')->count();
         $data['puntee_portee'] = Employee::where('education', '=', 'ปริญญาตรี')->where('rank', '=', 'พ.ต.')->count();
@@ -247,7 +272,7 @@ class EmployeeController extends Controller
 
         return view('employees.education', $data);
     }
-    
+
     public function age()
     {
         $data['ranks'] = Employee::select('rank')->get();
@@ -407,7 +432,7 @@ class EmployeeController extends Controller
         $data['sibto'] = Employee::where('rank', '=', 'ส.ท.')->count();
         $data['sibtee'] = Employee::where('rank', '=', 'ส.ต.')->count();
 
-        $data['rank_sum'] = Employee::whereIn('rank' , ['พ.ท.', 'พ.ต.', 'ร.อ.', 'ร.ท.', 'ร.ต.', 'จ.ส.อ.(พ.)', 'จ.ส.อ.', 'จ.ส.ท.', 'จ.ส.ต.', 'ส.อ.', 'ส.ท.', 'ส.ต.'])->count();
+        $data['rank_sum'] = Employee::whereIn('rank', ['พ.ท.', 'พ.ต.', 'ร.อ.', 'ร.ท.', 'ร.ต.', 'จ.ส.อ.(พ.)', 'จ.ส.อ.', 'จ.ส.ท.', 'จ.ส.ต.', 'ส.อ.', 'ส.ท.', 'ส.ต.'])->count();
 
         return view('employees.age', $data);
     }

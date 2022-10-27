@@ -3,6 +3,12 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-7">
+            @if (session('fail'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ Session::get('fail') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="card">
                 <h5 class="card-header text-center">แก้ไขข้อมูลกำลังพล</h5>
                 <div class="card-body">
@@ -127,19 +133,21 @@
                             <label class="form-label" for="education"><b>วุฒิการศึกษา</b></label>
                             <select class="form-select @error('education') is-invalid @enderror" name="education"
                                 required>
-                                <option value="ม.ต้น" @if ($employee->education == "ม.ต้น") selected
+                                <option value="มัธยมศึกษาตอนต้น" @if ($employee->education == "มัธยมศึกษาตอนต้น") selected
                                     @endif>มัธยมศึกษาตอนต้น</option>
-                                <option value="ม.ปลาย" @if ($employee->education == "ม.ปลาย") selected
+                                <option value="มัธยมศึกษาตอนปลาย" @if ($employee->education == "มัธยมศึกษาตอนปลาย") selected
                                     @endif>มัธยมศึกษาตอนปลาย</option>
-                                <option value="ปวช." @if ($employee->education == "ปวช.") selected @endif>ปวช.</option>
-                                <option value="ปวส." @if ($employee->education == "ปวส.") selected @endif>ปวส.</option>
+                                <option value="ประกาศนียบัตรวิชาชีพ" @if ($employee->education == "ประกาศนียบัตรวิชาชีพ") selected @endif>ประกาศนียบัตรวิชาชีพ</option>
+                                <option value="ประกาศนียบัตรวิชาชีพชั้นสูง" @if ($employee->education == "ประกาศนียบัตรวิชาชีพชั้นสูง") selected @endif>ประกาศนียบัตรวิชาชีพชั้นสูง</option>
                                 <option value="อนุปริญญา" @if ($employee->education == "อนุปริญญา") selected
                                     @endif>อนุปริญญา</option>
-                                <option value="ป.ตรี" @if ($employee->education == "ป.ตรี") selected @endif>ปริญญาตรี
+                                <option value="ปริญญาตรี" @if ($employee->education == "ปริญญาตรี") selected
+                                    @endif>ปริญญาตรี
                                 </option>
-                                <option value="ป.โท" @if ($employee->education == "ป.โท") selected @endif>ปริญญาโท
+                                <option value="ปริญญาโท" @if ($employee->education == "ปริญญาโท") selected @endif>ปริญญาโท
                                 </option>
-                                <option value="ป.เอก" @if ($employee->education == "ป.เอก") selected @endif>ปริญญาเอก
+                                <option value="ปริญญาเอก" @if ($employee->education == "ปริญญาเอก") selected
+                                    @endif>ปริญญาเอก
                                 </option>
                                 <option value="" @if ($employee->education == "") selected @endif>อื่น ๆ</option>
                             </select>

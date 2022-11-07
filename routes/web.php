@@ -32,6 +32,5 @@ Route::get('/report/age', [EmployeeController::class, 'age'])->name('employees.a
 Route::get('/report/position', [PositionController::class, 'report'])->name('positions.null');
 
 Route::get('/test', function(){
-    $var = "2016-10-01";
-    return formatdateeng($var);
+    line('test', '7bH2RxyRinrEwHJDVGRyZufzhBq8ZYBJaZeWYFZuA53');
 });

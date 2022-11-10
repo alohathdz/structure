@@ -11,8 +11,8 @@
                 </div>
                 <div class="card-body">
                     <a href="{{ route('employees.index') }}" class="btn btn-primary btn-sm"><i
-                            class="bi bi-building"></i> กำลังพล</a>
-                    <a href="{{ route('positions.index') }}" class="btn btn-success btn-sm"><i class="bi bi-person"></i>
+                            class="bi bi-person"></i> กำลังพล</a>
+                    <a href="{{ route('positions.index') }}" class="btn btn-success btn-sm"><i class="bi bi-building"></i>
                         ทำเนียบ</a>
                 </div>
             </div>

@@ -41,7 +41,7 @@
                     <td>{{ $position->corps }}</td>
                     <td>
                         @php
-                        $employee = ('App\Models\Employee')::select('firstname', 'lastname', 'id_number',
+                        $employee = ('App\Models\Employee')::select('rank', 'firstname', 'lastname', 'id_number',
                         'soldier_number')
                         ->join('positions', 'employees.position_id', '=', 'positions.id')
                         ->where('position_id', $position->id)
@@ -51,7 +51,7 @@
                         <p style="color:red">ว่าง</p>
                         @else
                         @foreach ($employee as $emp)
-                        {{ $emp->firstname }}&ensp;{{ $emp->lastname }}<br>
+                        {{ $emp->rank . $emp->firstname }}&ensp;{{ $emp->lastname }}<br>
                         {{ $emp->id_number }}<br>
                         {{ $emp->soldier_number }}
                         @endforeach

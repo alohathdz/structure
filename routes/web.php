@@ -30,6 +30,6 @@ Route::get('/report/education', [EmployeeController::class, 'education'])->name(
 Route::get('/report/age', [EmployeeController::class, 'age'])->name('employees.age');
 Route::get('/report/position', [PositionController::class, 'report'])->name('positions.null');
 
-Route::get('/test', function(){
+/*Route::get('/test', function(){
     line('test', '7bH2RxyRinrEwHJDVGRyZufzhBq8ZYBJaZeWYFZuA53');
-});
+});*/
